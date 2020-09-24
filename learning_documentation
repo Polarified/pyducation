@@ -1,0 +1,85 @@
+Fluent Python
+Refresh of dict & set and how hash tables work
+
+Binary types and their separation from text strings.
+Encodings - different sizes and endianness, identification with chardet
+Encodings - how to deal with them failing and how to prevent failure by specifiying and not relying on defaults.
+Encodings - There are a ton of weird things here, because it is a super broken system. You have the BOM, normalization, bad sorting, etc. You just need to keep these in mind when working with unicode.
+Storing of strings in memory in Python3 - just like ints, you choose the size (1,2,4 bytes) based on the data.
+
+Introspection - Python's ability to determine types of objects at runtime.
+Function attributes (__code__, __annotations__, __defaults__&__kwdefaults__) and using the inspect module to view function anatomy
+Decorators - they simply replace a function with other logic, and are run at import time.
+Refresh of registration using a few different methods (globals, inspect from another module, decorators)
+Variable scopes (LEGB), closures and free variables. func.__closure__ & func.__code__.co_freevars/co_varnames.
+Nonlocal and its use to keep immutable types as free variables, even when they are assigned new values.
+@functools.wraps - used to prevent masking of the __name__ and __doc__ of a function after it is decorated.
+@functools.lru_cache - caches results of calls to the function with different input. Can save time in Fibo recursion, for example.
+@functools.singledispatch - replaces function overriding with different arguments.
+Shallow and deep copies, with the copy module
+Mutables types as objects in tuples and as parameters, behave very weirdly. Be cautious and think about the ramifications.
+Using __slots__ to save on memory to replace __dict__ when there are millions of instances.
+The ability to override class attributes per individual instance. #BadDocumentationOfLearning
+__getattr__ and __setattr__ are useful for dynamic attributes, but should be added carefully and together.
+Using protocols and learning special dunder methods.
+Pythonic != with a bunch of hard to understand idioms in a one-liner. Sum of column of a matrix can be done: sum(row[x] for row in matrix). This is Pythonic, not a bunch of operator and reduce and lambda.
+
+Protocol, interface, x-object-like are all words that describe something that conforms to how a certain something should behave.
+Duck-typing: operating with objects no matter their type, as long as they implement certain protocols (the relevant dunder methods, etc.)
+Goose-typing: you can check if an object is an instance of a class, as long as you are checking against an ABC(AbstractBaseClass). This way you are allowing the hierarchy to work.
+ABCs: You won't often make them. If you do, they can have concrete methods, as long as they don't rely on attributes.
+ABCs: Inherit from abc.ABC, stack decorators (abc.abstractmethod & classmethod to make an abstract class method).
+ABCs: You can register a class to an ABC and make it a virtual-subclass, which doesn't inherit anything, but conforms to the interface.
+ABCs: A virtual subclass isn't in the MRO(MethodResolutionOrder), yet it is still a subclass (checked by issubclass).
+Subclasses can be detected if they simply implement a certain method, if the parent class has __subclasshook__. It can 'vouch' for the subclass.
+Subclassing builtin types is tricky - the built in methods won't necessarily get replaced everywhere. Feature, not bug - the builtins are optimized, not extensible, so we have UserDict, UserList, UserStr for extensibility.
+Multiple inheritance and diamonds with the MRO are tricky as well.
+Separate between interface inheritance and implementation inheritance (an is-a logical relationship vs avoiding code duplication).
+
+NotImplemented(singleton to return if operator cannot handle operand) vs NotImplementedError (abstract method needs overriding)
+Infix operators have 2 operands - sometimes one of them has functionality implemented and the other doesnt. There is a sequence of checks for this, and it can raise NotImplemented or TypeError. __r*__ can be implemented to check the method for the flip.
+
+Iterable vs Iterator: An iterable is anything that has __iter__ or __getitem__ (can be used to replace the __iter__ functionality)
+Iterable vs Iterator: An iterator is retrieved from an iterable with the iter builtin.
+Iterable implements __iter__ but not __next__, Iterator implements __next__ and can optionally, for convenience, implement __iter__ (and return itself).
+The Iterator design pattern makes it very clear by separating iterable and iterator. The __iter__ from the iterable returns an Iterator on the collection from the iterable class.
+A generator is a function, that returns a generator object. This object is an iterator. next can be called on it to produce values from the yields.
+Laziness - postponing things to the latest date in order to save memory and avoid useless processing.
+If all a class does is implement a generator with __iter__ - you can just use a generator function - it is a generator factory, just the same.
+
+Else after for, while, try is like: do this, then this (if there was no break/except).
+Context managers - they allow creation and destruction of a certain setup. __enter__ and __exit__ are the needed methods. Can be done with @contextmanager too and a yield too.
+
+Coroutines - you run code, then wait until you get fed back and asked to do stuff again.
+You need to prime a generator coroutine in order to use it. This can be done with a decorator to any coroutine function.
+yield from - useful for sending information in and out of subgenerators. The pattern is caller, delegating generator, subgenerator.
+Coroutines with delegation and such are complicated. But the general idea is to allow for async activity. We want do something, then stop running it and wait for input, allowing other code to run. This is a nice way to code.
+
+Concurrency - can do io much faster. Often you refactor a sequential loop into a function that is called concurrently.
+Futures - they represent something that will eventually happen, in order to happen it must be scheduled for execution, for example by an Executor.
+How can concurrency work when there is a GIL? Well, standard library functions that do blocking IO release the GIL (they are written in C and can do that), so each thread that is blocking can give another thread runtime.
+TQDM - does progress bars, super cool!
+Futures with as_completed will iterate over futures and return them when they are done. This allows us to block less.
+How can async perform faster than sequential, when both are single threaded? Instead of waiting and blocking, we let things block and move on to other things until they async operation returns.
+asyncio is nonblocking by design, and also single-threaded, which means we don't have to worry about deadlocks and such.
+
+__new__ & __init__: New actually makes the instance, it's the true constructor. Init initializes it. Usually __new__ is just inherited from object and that is enough.
+Property - it doesn't matter if an attribute is calculated or stored, it should share the same interface.
+
+
+CPython Internals
+You can play around with grammar to add keywords, like adding proceed as a synonym to pass.
+Allocation of memory is done with a wrapper to malloc. The pointers to Python objects are stored in a PyArena object, which also holds a linked list of allocated memory blocks.
+Reference counting and garbage collecting are at the core of memory management in Python. The gc module can show the threshold for when things are collected, and can even be called to collect!
+Python has multiple run modes. Each has a different sort of path to execution.
+Whatever the case, python code needs to go through a tokenizer, a parser-tokenizer, and then become an AST.
+Compiling is taking that Abstract Syntax Tree and turning it into commands the CPU understands.
+The compilation needs a compiler state, a symtable (a list of namespaces, globals and locals to resolve scopes etc.) and a module in the form of an AST.
+Then it can actually compile things into bytecode (turn it into a CFG). It will also catch logic and code errors and raise them to protect the execution stage from runtime exceeptions.
+So the compilation of a Python code will determine what kind of thing it is compiling (module, suite, expression, interactive) and then compile that thing by going through each statement and compiling it.
+Each statement has a dedicated compilation function, that has certain blocks (***This is a part I didn't go into***).
+Once we compiled, the compiler has a list of frame blocks with lists of instructions and a pointer to the next block.
+Assembly of the list of frame blocks into bytecode is done by performing a depth-first-search on the blocks and creating a single bytecode sequence.
+Execution is done by taking bytecode (from .pyc or from the compilation we just performed), and executing with a Stack Frame.
+Stack Frame - ycha frame that includes the return address, arguments for the function call, local variables and other state information. It is pushed onto the stack to save the information.
+
