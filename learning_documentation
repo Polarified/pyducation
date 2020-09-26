@@ -81,5 +81,17 @@ Each statement has a dedicated compilation function, that has certain blocks (**
 Once we compiled, the compiler has a list of frame blocks with lists of instructions and a pointer to the next block.
 Assembly of the list of frame blocks into bytecode is done by performing a depth-first-search on the blocks and creating a single bytecode sequence.
 Execution is done by taking bytecode (from .pyc or from the compilation we just performed), and executing with a Stack Frame.
-Stack Frame - ycha frame that includes the return address, arguments for the function call, local variables and other state information. It is pushed onto the stack to save the information.
+Stack Frame - a frame that includes the return address, arguments for the function call, local variables and other state information. It is pushed onto the stack to save the information.
+When appending an object to a list for example, we see the object loaded to the value stack, then appended. Predictions are done to help with efficiency.
 
+Dunder methods are implemented for PyObject, and all have default behavior defined in the C code. For if the item in the PyObject struct for the specific dunder is NULL, it will default.
+The C long is the Python int. It is allocated after figuring out how many digits it has, for memory conservation.
+The generator remembers the last value of local variables since the frame is persistent between calls.
+
+There are two types of modules in the CPython Standard Library - pure Python, and C with Python wrappers.
+Builtins like print are defined written in C in bltinmodule.c
+
+Linux Internals
+The Linux Kernel is monolithic, meaning it contains a lot of things and bundles them together. To include modularity, we have modules.
+A module is an object file that's code can be linked to the kernel at runtime. The object code has functions that implement some upper layer feature, and is run in kernel mode.
+I wrote a kernel module! You just need to write the makefile and insmod the .ko file. Easy!

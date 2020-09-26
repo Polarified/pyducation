@@ -5,9 +5,25 @@ level3: kgg9ki?iDero (h0w_is_th1s_h4ck3r_f0ll0wing_m3)
 level4: 0LRS6_hjGzCf
 level5:
 
+hackthissite:
+1: 2a6b7d28 (inspect element)
+2: "" (there is no password)
+3: 1d5de495 (changed mail to polarified)
+4: a8e2f786 (changed mail to polarified)
+5: 0a8cbbc5 (I did the same thing again. I guess on 4, people rewrote the form to do something else)
+6: 73451920 (d = [chr(ord(c)-i) for i, c in enumerate(p)])
+7: df17c5f7 (year; ls)
+8: f1483499 (<!--#exec cmd="ls ../" -->)
+9: 5dffd7e4 (the same as earlier, but with ../../9/ in the url to hop over to level 9)
+10: go to cookies and change no to yes. Now any password works.
+11:
+
+
 natas continuation:
 natas14: Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
-natas15:
+natas15: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J (sql injection, natas15" #)
+natas16: WaIHEacj63wnNIBROHeqi3p9t0m5nhmh (blind sql injection, answering a certain true false question).
+natas17:
 
 
 Ideals I would like to follow:
@@ -18,7 +34,6 @@ Document things you learn
 
 TODO:
 Concurrency and metaprogramming in Python. This isn't relevant to where I am right now, so I will get back to it in the future.
-Cython Internals (along with dis)
 Writing pyt
 Doing some kind of project with Django, Flask, SQL, etc!
 
@@ -28,3 +43,5 @@ Assembly
 Linux Internals
 
 gracker.org, Narnia, Natas, Krypton
+
+"" OR 1 = 1; UPDATE users SET password="a" WHERE username="natas16" --
