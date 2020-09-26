@@ -95,3 +95,16 @@ Linux Internals
 The Linux Kernel is monolithic, meaning it contains a lot of things and bundles them together. To include modularity, we have modules.
 A module is an object file that's code can be linked to the kernel at runtime. The object code has functions that implement some upper layer feature, and is run in kernel mode.
 I wrote a kernel module! You just need to write the makefile and insmod the .ko file. Easy!
+3 Memory Addresses: logical(segment + offset), linear(virtual), physical(actual memory cell). Translated from logical->linear->physical.
+Segmentation:
+Logical = segment selector(16bit) + offset(32bit). These are stored in segmentation registers.
+Each segment is represented by a segment descriptor, which describes it's characteristics. Stored in a global/local descriptor table.
+The segment descriptor can be loaded to a special register. Once this happens, we have everything we need in the segment registers and special descriptor registers, and can now work fast!
+Logical->Linear: TI of Segment Selector points to gdtr or ldtr according to where Segment Descriptor is. Compute Segment Descriptor address from in Segment Selector index*8 + gdtr/ldtr. Add offset, voila.
+Paging:
+Physical memory is split into page frames. Logical memory is split into pages. The frame may not be contiguous, but the page will be.
+Page Tables map between linear and physical addresses.
+32 bits of linear are split into directory(10), table(10), offset(12).
+
+Hacking
+I learned about Blind Sql Injections. You inject something that will have one of two responses. Then you can check for different inputs if you got true or false, and use this to build up knowledge.
