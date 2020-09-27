@@ -6,6 +6,7 @@ level4: 0LRS6_hjGzCf
 level5:
 
 hackthissite:
+Basic:
 1: 2a6b7d28 (inspect element)
 2: "" (there is no password)
 3: 1d5de495 (changed mail to polarified)
@@ -16,7 +17,9 @@ hackthissite:
 8: f1483499 (<!--#exec cmd="ls ../" -->)
 9: 5dffd7e4 (the same as earlier, but with ../../9/ in the url to hop over to level 9)
 10: go to cookies and change no to yes. Now any password works.
-11:
+11: I cheated. Figured out directory listing, then got to a place where .htaccess isn't protected. Going to the file, found the answer.
+Realistic:
+Completed 1, sent a get request with a different vote (100)
 
 
 natas continuation:
@@ -36,6 +39,7 @@ TODO:
 Concurrency and metaprogramming in Python. This isn't relevant to where I am right now, so I will get back to it in the future.
 Writing pyt
 Doing some kind of project with Django, Flask, SQL, etc!
+CS231
 
 Powershell
 Assembly
@@ -43,5 +47,4 @@ Assembly
 Linux Internals
 
 gracker.org, Narnia, Natas, Krypton
-
-"" OR 1 = 1; UPDATE users SET password="a" WHERE username="natas16" --
+Project Euler
