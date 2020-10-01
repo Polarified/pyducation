@@ -1,33 +1,18 @@
 import math
 import functools
+import numpy as np
+
+from euler.helpers import fib, prime_factors, lcm, is_prime, sieve_of_eratosthenes
 
 # 1. Multiples of 3 and 5
 answer = sum(x for x in range(1000) if x % 3 == 0 or x % 5 == 0)
 print("1.", answer)
 
-
 # 2. Even value Fibonacci sum
-@functools.lru_cache(maxsize=None)
-def fib(n):
-    if n < 2:
-        return n
-    return fib(n - 1) + fib(n - 2)
-
-
 answer = sum(fib(x) for x in range(50) if fib(x) % 2 == 0 and fib(x) < 4000000)
 print("2.", answer)
 
-
 # 3. Largest prime factor
-def prime_factors(n):
-    factors = []
-    for factor in range(2, int(math.sqrt(n)) + 1):
-        while n % factor == 0:
-            factors.append(factor)
-            n /= factor
-    return factors
-
-
 answer = max(prime_factors(600851475143))
 print("3.", answer)
 
@@ -36,7 +21,7 @@ answer = max(x * y for x in range(100, 1000) for y in range(100, 1000) if str(x 
 print("4.", answer)
 
 # 5. Smallest multiple
-answer = functools.reduce(lambda a, b: int(a * b / int(math.gcd(a, b))), range(1, 20))
+answer = lcm(range(1, 20))
 print("5.", answer)
 
 # 6. Sum square difference
@@ -56,13 +41,6 @@ print("6.", answer)
 #         primes.append(candidate)
 # answer = primes[-1]
 # print("7.", answer)
-
-# A faster solution
-def is_prime(n):
-    for factor in range(2, int(math.sqrt(n)) + 1):
-        if n % factor == 0 and n != factor:
-            return False
-    return True
 
 
 count = 0
@@ -89,16 +67,5 @@ print("9.", answer)
 
 
 # 10. Summation of primes
-def sieve(n):
-    numbers = [True] * (n + 1)
-    for i in range(2, int(math.sqrt(n) + 1)):
-        if numbers[i]:
-            for j in range(n):
-                if i ** 2 + j * i > n:
-                    break
-                numbers[i ** 2 + j * i] = False
-    return [i + 2 for i, n in enumerate(numbers[2:-1]) if n]
-
-
-answer = sum(sieve(2000000))
+answer = sum(sieve_of_eratosthenes(2000000))
 print("10.", answer)
