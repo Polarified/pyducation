@@ -1,7 +1,7 @@
-import math
 import itertools
 import inflect
 import datetime
+from operator import itemgetter
 from euler.helpers import *
 
 answer = 'BLANK'
@@ -168,23 +168,10 @@ numbers = """37107287533902102798797998220837590246510135740250
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
 
-# answer = str(sum(list(map(int, numbers.splitlines()))))[:10]
+answer = str(sum(list(map(int, numbers.splitlines()))))[:10]
 print("13.", answer)
 
-
 # 14. Longest Collatz sequence
-def collatz(n):
-    sequence = []
-    while n > 1:
-        sequence.append(int(n))
-        if n % 2 == 0:
-            n /= 2
-        else:
-            n = 3 * n + 1
-    sequence.append(1)
-    return sequence
-
-
 # answer = max(((i, len(collatz(i))) for i in range(2, 1000000)), key=itemgetter(1))[0]
 print("14.", answer)
 
@@ -202,7 +189,32 @@ e = inflect.engine()
 answer = sum(len(e.number_to_words(x).replace(' ', '').replace('-', '')) for x in range(1, 1001))
 print("17.", answer)
 
+
 # 18. Maximum path sum I
+pyramid = """75
+95 64
+17 47 82
+18 35 87 10
+20 04 82 47 65
+19 01 23 75 03 34
+88 02 77 73 07 63 67
+99 65 04 28 06 16 70 92
+41 41 26 56 83 40 80 70 33
+41 48 72 33 47 32 37 16 94 29
+53 71 44 65 25 43 91 52 97 51 14
+70 11 33 28 77 73 17 78 39 68 17 57
+91 71 52 38 17 14 91 43 58 50 27 29 48
+63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
+pyramid = [[int(x) for x in line.split()] for line in pyramid.splitlines()]
+
+for row_index in range(len(pyramid) - 2, -1, -1):
+    print(pyramid[row_index])
+    for col_index in range(len(pyramid[row_index])):
+        pyramid[row_index][col_index] += max(pyramid[row_index + 1][col_index], pyramid[row_index + 1][col_index + 1])
+
+answer = pyramid[0][0]
+print("18.", answer)
 
 # 19. Counting Sundays
 answer = len([datetime.date(y, m, 1).weekday() for y in range(1901, 2001) for m in range(1, 13) if

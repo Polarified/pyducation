@@ -38,7 +38,7 @@ Document things you learn
 TODO:
 Concurrency and metaprogramming in Python. This isn't relevant to where I am right now, so I will get back to it in the future.
 Writing pyt
-Doing some kind of project with Django, Flask, SQL, etc!
+URL Shortener with Flask, Django, sqlite.
 CS231
 
 Powershell
@@ -48,3 +48,5 @@ Linux Internals
 
 gracker.org, Narnia, Natas, Krypton
 Project Euler
+
+Writing a nim game!

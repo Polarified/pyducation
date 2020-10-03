@@ -72,3 +72,34 @@ def lcm(*args):
     Finds the least common multiple of a sequence.
     """
     return functools.reduce(lambda a, b: int(a * b / int(math.gcd(a, b))), *args)
+
+
+@functools.lru_cache(maxsize=None)
+def are_amicable(a, b):
+    """
+    Amicability check for two integers a, b
+    Amicable == Sum of proper divisors is equal.
+    """
+    return a != b and sum(improved_factorization(a)) == b and sum(improved_factorization(b)) == a
+
+
+def is_perfect(n):
+    """
+    Perfection test for integer n
+    A perfect number is one where the sum of proper divisors is equal to the number itself.
+    """
+    return n == sum(improved_factorization(n))
+
+
+@functools.lru_cache(maxsize=None)
+def collatz(n):
+    sequence = []
+    while n > 1:
+        sequence.append(int(n))
+        if n % 2 == 0:
+            n /= 2
+        else:
+            n = 3 * n + 1
+    sequence.append(1)
+    return sequence
+
