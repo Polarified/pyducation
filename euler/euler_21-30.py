@@ -6,10 +6,15 @@ import decimal
 
 from euler.helpers import *
 
-answer = "BLANK"
-
 # 21. Amicable numbers
-# answer = sum(a + b for a in range(1, 10000) for b in range(1, 10000) if a != b and are_amicable(a, b))
+d = {i: sum(improved_factorization(i, False)) for i in range(1, 10000)}
+answer = 0
+for i in range(1, 10000):
+    try:
+        if d[d[i]] == i and d[i] != i:
+            answer += i
+    except KeyError:
+        pass
 print("21.", answer)
 
 # 22. Name scores
@@ -17,6 +22,18 @@ names = sorted(open('p022_names.txt', 'r').read().replace('"', '').split(','))
 scores = {name: (names.index(name) + 1) * sum(ord(c) - 64 for c in name) for name in names}
 answer = sum(scores.values())
 print("22.", answer)
+
+# 23. Non-abundant sums
+abundants = [i for i in range(1, 28123) if is_abundant(i)]
+s = set()
+for i in abundants:
+    for j in abundants:
+        if i + j > 28123:
+            break
+        s.add(i + j)
+
+answer = sum(set(range(1, 28123)) - s)
+print("23.", answer)
 
 # 24. Lexicographic permutations
 answer = list(itertools.permutations(range(10)))[999999]
@@ -43,6 +60,9 @@ def cycle_size(n):
         x += 1
         if (10 ** x) % n == 1:
             return x
+
+
+# 27. Quadratic primes
 
 
 t = time.time()

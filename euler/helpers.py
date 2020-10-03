@@ -21,9 +21,13 @@ def trial_division_factorization(n):
     return [factor for factor in range(1, int(n / 2) + 1) if n % factor == 0] + [n]
 
 
-def improved_factorization(n):
-    return [item for subset in [{i, int(n / i)} for i in range(1, int(math.sqrt(n)) + 1) if n % i == 0] for item in
-            subset]
+def improved_factorization(n, inclusive=True):
+    factors = [item for subset in [{i, int(n / i)} for i in range(1, int(math.sqrt(n)) + 1) if n % i == 0] for item in
+               subset]
+    if inclusive:
+        return factors
+    else:
+        return sorted(factors)[:-1]
 
 
 def prime_factors(n):
@@ -88,7 +92,15 @@ def is_perfect(n):
     Perfection test for integer n
     A perfect number is one where the sum of proper divisors is equal to the number itself.
     """
-    return n == sum(improved_factorization(n))
+    return n == sum(improved_factorization(n, inclusive=False))
+
+
+def is_deficient(n):
+    return n > sum(improved_factorization(n, inclusive=False))
+
+
+def is_abundant(n):
+    return n < sum(improved_factorization(n, inclusive=False))
 
 
 @functools.lru_cache(maxsize=None)
@@ -102,4 +114,3 @@ def collatz(n):
             n = 3 * n + 1
     sequence.append(1)
     return sequence
-
