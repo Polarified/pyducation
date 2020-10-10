@@ -63,7 +63,23 @@ def cycle_size(n):
 
 
 # 27. Quadratic primes
+coefficients = (0, 0)
+max_n = 0
+n = 0
+for a in range(-999, 1000):
+    for b in range(-1000, 1001):
+        while True:
+            val = n ** 2 + a * n + b
+            if val >= 0 and is_prime(val):
+                n += 1
+            else:
+                break
+        if n > max_n:
+            coefficients = (a, b)
+            max_n = n
+        n = 0
 
+print(coefficients, max_n)
 
 t = time.time()
 answer = max(((i, cycle_size(i)) for i in range(2, 1000) if i % 5 != 0 and i % 2 != 0), key=itemgetter(1))[0]
