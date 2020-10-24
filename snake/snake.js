@@ -10,7 +10,7 @@ apple_border = 'darkgreen'
 
 let snake = [
       {x: 200, y: 200},
-      {x: 200, y: 190}
+      {x: 190, y: 200}
     ]
 let vx = 10;
 let vy = 0;
