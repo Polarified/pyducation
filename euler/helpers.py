@@ -1,6 +1,8 @@
 import math
 import functools
-import numpy as np
+
+
+# import numpy as np
 
 
 @functools.lru_cache(maxsize=None)
@@ -46,6 +48,8 @@ def is_prime(n):
     """
     Primality check for a number n.
     """
+    if n == 1:
+        return False
     for factor in range(2, int(math.sqrt(n)) + 1):
         if n % factor == 0 and n != factor:
             return False
@@ -59,16 +63,16 @@ def are_coprime(a, b):
     return math.gcd(a, b) == 1
 
 
-def sieve_of_eratosthenes(n):
-    """
-    Finds all primes below a certain number n.
-    """
-    numbers = np.ones(n)
-    for i in range(2, int(np.ceil(np.sqrt(n)))):
-        if numbers[i]:
-            for j in range(i * i, n, i):
-                numbers[j] = 0
-    return [i for i in range(2, len(numbers)) if numbers[i]]
+# def sieve_of_eratosthenes(n):
+#     """
+#     Finds all primes below a certain number n.
+#     """
+#     numbers = np.ones(n)
+#     for i in range(2, int(np.ceil(np.sqrt(n)))):
+#         if numbers[i]:
+#             for j in range(i * i, n, i):
+#                 numbers[j] = 0
+#     return [i for i in range(2, len(numbers)) if numbers[i]]
 
 
 def lcm(*args):
@@ -114,3 +118,23 @@ def collatz(n):
             n = 3 * n + 1
     sequence.append(1)
     return sequence
+
+
+def rotations(n):
+    return [int(str(n)[i:] + str(n)[:i]) for i in range(len(str(n)))]
+
+
+def is_circular(n):
+    return all(map(is_prime, rotations(n)))
+
+
+def is_palindrome(n):
+    return str(n)[::-1] == str(n)
+
+
+def truncations(n):
+    return {int(str(n)[i:]) for i in range(len(str(n)))} | {int(str(n)[:i]) for i in range(1, len(str(n)))}
+
+
+def is_truncatable(n):
+    return all(map(is_prime, truncations(n)))
