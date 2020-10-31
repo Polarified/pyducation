@@ -1,8 +1,8 @@
+import itertools
 import math
 import functools
-
-
-# import numpy as np
+import time
+import numpy as np
 
 
 @functools.lru_cache(maxsize=None)
@@ -63,16 +63,16 @@ def are_coprime(a, b):
     return math.gcd(a, b) == 1
 
 
-# def sieve_of_eratosthenes(n):
-#     """
-#     Finds all primes below a certain number n.
-#     """
-#     numbers = np.ones(n)
-#     for i in range(2, int(np.ceil(np.sqrt(n)))):
-#         if numbers[i]:
-#             for j in range(i * i, n, i):
-#                 numbers[j] = 0
-#     return [i for i in range(2, len(numbers)) if numbers[i]]
+def sieve_of_eratosthenes(n):
+    """
+    Finds all primes below a certain number n.
+    """
+    numbers = np.ones(n)
+    for i in range(2, int(np.ceil(np.sqrt(n)))):
+        if numbers[i]:
+            for j in range(i * i, n, i):
+                numbers[j] = 0
+    return [i for i in range(2, len(numbers)) if numbers[i]]
 
 
 def lcm(*args):
@@ -138,3 +138,23 @@ def truncations(n):
 
 def is_truncatable(n):
     return all(map(is_prime, truncations(n)))
+
+
+def is_pandigital(n):
+    for i in range(1, len(str(n)) + 1):
+        if str(i) not in str(n):
+            return False
+    return True
+
+
+def timer(func):
+    @functools.wraps(func)
+    def wrapper_timer(*args, **kwargs):
+        tic = time.perf_counter()
+        value = func(*args, **kwargs)
+        toc = time.perf_counter()
+        elapsed = toc - tic
+        print(f"Elapsed time: {elapsed:0.4f} seconds")
+        return value
+
+    return wrapper_timer
