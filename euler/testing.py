@@ -1,20 +1,48 @@
 from euler.helpers import *
 
-
+# Need to use itertools.combinations_with_replacement, might help
 def ways_to_make(n):
-    """
-    Calculate how many ways there are to make a certain currency, using recursion and then multiplying.
-    :param n:
-    :return:
-    """
     if n == 1:
-        return 1
-    elif n == 2 or n == 20 or n == 200:
-        return {(ways_to_make(n / 2), ways_to_make(n / 2))} | {n}
-    elif n == 5 or n == 50:
-        return {(ways_to_make(n * 0.4), ways_to_make(n * 0.4), ways_to_make(n * 0.2))} | {n}
-    elif n == 10 or n == 100:
-        return ways_to_make(n / 2) | ways_to_make(n / 2) | {n, (n / 5, n / 5, n / 5, n / 5)}
+        return {1}
+    if n == 2:
+        return {2, (1, 1)}
+    if n == 5:
+        return {{ways_to_make(2)} | {ways_to_make(2)} | ways_to_make(1)}
+    if n == 10:
+        return 11
+    if n == 20:
+        return 20
+    if n == 50:
+        return 40
+    if n == 100:
+        return 82
+    if n == 200:
+        return 164
 
 
-print(ways_to_make(5))
+"""
+1 -> 1.
+2 -> 1, 1 / 2.
+5 -> 2, 2, 1 / 5.
+1 1 1 1 1
+2 1 1 1
+2 2 1
+5
+10 -> 5, 5 / 2, 2, 2, 2, 2/ 10
+1 1 1 1 1 1 1 1 1 1
+2 1 1 1 1 1 1 1 1
+2 2 1 1 1 1 1 1
+2 2 2 1 1 1 1
+2 2 2 2 1 1
+5 2 2 1
+5 2 1 1 1
+5 1 1 1 1 1
+5 5
+2 2 2 2 2
+10
+
+
+
+So to make 10, we have this many ways:
+
+"""
