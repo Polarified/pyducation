@@ -1,5 +1,6 @@
 from euler.helpers import *
 
+
 # Need to use itertools.combinations_with_replacement, might help
 def ways_to_make(n):
     if n == 1:
@@ -46,3 +47,5 @@ def ways_to_make(n):
 So to make 10, we have this many ways:
 
 """
+
+print(is_subtring_divisibile('0406357289'))

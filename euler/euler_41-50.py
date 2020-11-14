@@ -19,3 +19,9 @@ with open('p042_words.txt', 'r') as f:
     answer = len([word for word in words if sum(ord(c) - 64 for c in word) in triangle_numbers])
 
 print("42.", answer)
+
+# 43. Sub-string divisibility
+pandigitals = [n for n in map(''.join, itertools.permutations('0123456789'))]
+answer = sum([int(n) for n in pandigitals if is_subtring_divisibile(n)])
+print("43.", answer)
+
