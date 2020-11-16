@@ -56,3 +56,10 @@ Ideals I would like to follow:
 Keep things remote, not local
 Keep learning, all the time
 Document things you learn
+
+The Python Challenge
+level0: change the 0 to 2 ** 38. 274877906944.html
+level1: translation cipher, apply a rot of 2 to the word map in the url. ocr.html
+level2: take the mess in the page source, use a counter to find the least common elements.
+level3: regex look for the pattern. The important part is the letter in the middle, capture for it and you will find all the matches add up. linkedlist.html.
+level4: use urllib to keep going to the next link. It said 400 is enough, so after 400 we should get the answer. peak.html
