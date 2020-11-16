@@ -3,7 +3,19 @@ level1: TVeB0MIlx0KB (s3cr3t_backd00r_passw0rd)
 level2: rAWJ@yDbZo4c (n0b0dy_gu3sses_thi5_passw0rd)
 level3: kgg9ki?iDero (h0w_is_th1s_h4ck3r_f0ll0wing_m3)
 level4: 0LRS6_hjGzCf
-level5:
+There is an info gathering script, that runs with uid level5.
+We want to use this to get a shell.
+What could be helpful would be to override the path and make uname, cut or find/-exec ls -la {} run something of my own.
+However, I can't just add a script to the bin/sbin folders.
+However, I can run certain things in a different environment.
+level5: svNa9463?k4m
+So for this level we need to portscan with nmap, then connect with nc.
+Found the port on 2989. Then nc'd to 127.0.0.1 2989, to run some stuff and then get kicked.
+Copied and pasted a line, no clue what it does. But seemed interesting.
+It gave me access, quickly wrote cat /home/level6/.pass.
+level6: @XpLtpZhqtiG
+For this level, I need to do a buffer overflow that will change the return address of the function.
+level7:
 
 hackthissite:
 Basic:
@@ -28,25 +40,19 @@ natas15: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J (sql injection, natas15" #)
 natas16: WaIHEacj63wnNIBROHeqi3p9t0m5nhmh (blind sql injection, answering a certain true false question).
 natas17:
 
+KRYPTON
+krypton1: KRYPTONISGREAT
+krypton2: ROTTEN
+krypton3: CAESARISEASY
+krypton4: BRUTE
+Monoalphabetic non rotation cipher - This level was kind of too much. Not actually doable imo, required too much guessing.
+krypton5: CLEARTEXT
+Vignere Cipher - I really enjoyed this level. For some reason my frequency analysis didn't work all that well, so I got bad rotations. Watched a vid and I did everything right...
+krypton6:
+I think the idea would be to try to generate a whole bunch of different options with varying keylengths, and then slave over all the different options looking for things that match nicely.
+
 
 Ideals I would like to follow:
-Keep things centralized, not local
+Keep things remote, not local
 Keep learning, all the time
 Document things you learn
-
-
-TODO:
-Concurrency and metaprogramming in Python. This isn't relevant to where I am right now, so I will get back to it in the future.
-Writing pyt
-URL Shortener with Flask, Django, sqlite.
-CS231
-
-Powershell
-Assembly
-
-Linux Internals
-
-gracker.org, Narnia, Natas, Krypton
-Project Euler
-
-Writing a nim game!

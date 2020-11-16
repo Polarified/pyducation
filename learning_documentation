@@ -105,7 +105,27 @@ Paging:
 Physical memory is split into page frames. Logical memory is split into pages. The frame may not be contiguous, but the page will be.
 Page Tables map between linear and physical addresses.
 32 bits of linear are split into directory(10), table(10), offset(12).
+Processes:
+Process0 = the idle process, Process1 = init.
+When a thread/child of a process dies, it has a certain state. It needs to have time to tell it's parent. But it is dead.
+This situation is called a zombie, where the child dies but is in a zombie state, waiting until the parent notices.
+If a parent dies, all children will be transferred to init and slowly noticed and removed for real.
+Interrupts:
+The kernel wants to deal with the crucial part of recognizing the interrupt immediately, and deal with it later when it isn't in the middle of doing something.
+An interrupt leads to a certain kernel control path. These need to be able to run nested, because they can be interrupted themselves!
+IRQs are the actual things that get signals about interrupts and tell the CPU (?)
+Scheduling:
+Different processes have different amounts of IO wait time. Therefore they need to be scheduled differently. But how can Linux tell the difference? It analyzes and dynamically changes the priority of a process over time.
+In the early versions of Linux, a complicated scan was done every process switch to choose the best process to schedule. The cost of this increased with the amount of processes running.
+In newer kernel versions, the choice is made in constant time, and is designed to work better with more processors, and distinguishes between interactive and batch processes better.
+Nice basically changes the base time quantam a process gets to run on the CPU with.
+
+
 
 Hacking
 I learned about Blind Sql Injections. You inject something that will have one of two responses. Then you can check for different inputs if you got true or false, and use this to build up knowledge.
 I learned about dynamic HTML execution (SLI). You can enter some kind of formatted command and it will execute.
+
+Django & React
+Django is a backend framework. It runs an app with models that are transformed into dbs.
+React is a frontend framework. It creates views and allows easily programming html/css/js to create pages.
