@@ -67,4 +67,8 @@ level5: use unpickling and then formatting of the data to create ascii art with 
 level6: go to channel.zip, extract text files. Read through them to find 'collect the comments'.
 Go through comments on each item in the zip archive, add them together and print to get ascii art with the answer. hockey.html
 Then, it is a clue! Looking at the letters that make up the ascii art reveals it. oxygen.html.
-level7:
+level7: Use PIL to read the rgb values of the grayscale part and figure out the next level. integrity.html
+level8: I gave up and needed a hint. The hint was for bzip. I wasn't even in the realm of thinking about compression, and the inflate line wasn't given to me. The answer is to enter un: huge, pw: file at good.html.
+level9: needed to draw dots for first and second, created a silhouette. bull.html
+level10: didn't recognize the series, dad got it. programmed something to generate it. 5808.html
+level11:
