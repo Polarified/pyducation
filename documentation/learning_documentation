@@ -1,0 +1,4 @@
+Hacking
+I learned about Blind Sql Injections. You inject something that will have one of two responses. Then you can check for different inputs if you got true or false, and use this to build up knowledge.
+I learned about dynamic HTML execution (SLI). You can enter some kind of formatted command and it will execute.
+

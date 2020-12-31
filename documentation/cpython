@@ -1,0 +1,23 @@
+CPython Internals
+You can play around with grammar to add keywords, like adding proceed as a synonym to pass.
+Allocation of memory is done with a wrapper to malloc. The pointers to Python objects are stored in a PyArena object, which also holds a linked list of allocated memory blocks.
+Reference counting and garbage collecting are at the core of memory management in Python. The gc module can show the threshold for when things are collected, and can even be called to collect!
+Python has multiple run modes. Each has a different sort of path to execution.
+Whatever the case, python code needs to go through a tokenizer, a parser-tokenizer, and then become an AST.
+Compiling is taking that Abstract Syntax Tree and turning it into commands the CPU understands.
+The compilation needs a compiler state, a symtable (a list of namespaces, globals and locals to resolve scopes etc.) and a module in the form of an AST.
+Then it can actually compile things into bytecode (turn it into a CFG). It will also catch logic and code errors and raise them to protect the execution stage from runtime exceeptions.
+So the compilation of a Python code will determine what kind of thing it is compiling (module, suite, expression, interactive) and then compile that thing by going through each statement and compiling it.
+Each statement has a dedicated compilation function, that has certain blocks (***This is a part I didn't go into***).
+Once we compiled, the compiler has a list of frame blocks with lists of instructions and a pointer to the next block.
+Assembly of the list of frame blocks into bytecode is done by performing a depth-first-search on the blocks and creating a single bytecode sequence.
+Execution is done by taking bytecode (from .pyc or from the compilation we just performed), and executing with a Stack Frame.
+Stack Frame - a frame that includes the return address, arguments for the function call, local variables and other state information. It is pushed onto the stack to save the information.
+When appending an object to a list for example, we see the object loaded to the value stack, then appended. Predictions are done to help with efficiency.
+
+Dunder methods are implemented for PyObject, and all have default behavior defined in the C code. For if the item in the PyObject struct for the specific dunder is NULL, it will default.
+The C long is the Python int. It is allocated after figuring out how many digits it has, for memory conservation.
+The generator remembers the last value of local variables since the frame is persistent between calls.
+
+There are two types of modules in the CPython Standard Library - pure Python, and C with Python wrappers.
+Builtins like print are defined written in C in bltinmodule.c

@@ -1,0 +1,5 @@
+Django & React
+Django is a backend framework. It runs an app with models that are transformed into dbs.
+React is a frontend framework. It creates views and allows easily programming html/css/js to create pages.
+
+Fetch & Then & Catch are functions to send requests and deal with responses in a Promise fashion. You wait for a response and deal with it when it arrives using the arrow functions.
