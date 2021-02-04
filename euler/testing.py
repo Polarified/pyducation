@@ -47,9 +47,3 @@ def ways_to_make(n):
 So to make 10, we have this many ways:
 
 """
-
-t = {triangular(n) for n in range(1, 100000)}
-p = {pentagonal(n) for n in range(1, 100000)}
-h = {hexagonal(n) for n in range(1, 100000)}
-commons = {x for x in t if x in p and x in h}
-print(commons)

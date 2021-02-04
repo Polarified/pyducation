@@ -11,7 +11,6 @@ def answer():
 
 print("41.", answer())
 
-
 # 42. Coded triangle numbers
 triangle_numbers = {int(i / 2 * (i + 1)) for i in range(1, 50)}
 with open('p042_words.txt', 'r') as f:
@@ -38,4 +37,23 @@ h = {hexagonal(n) for n in range(1, 100000)}
 commons = {x for x in t if x in p and x in h}
 print("45.", commons)
 
-# Goldbach's other conjecture
+# 46. Goldbach's other conjecture
+# Very inefficient. Requires some math to make better.
+odds = {n for n in range(2, 10000) if n % 2 == 1}
+primes = set(sieve_of_eratosthenes(10000))
+odd_composites = odds - primes
+oc = sorted(list(odd_composites))
+for n in oc:
+    print('Started searching for', n)
+    try:
+        for p in primes:
+            for k in range(1, n // 2):
+                if n == p + 2 * (k ** 2):
+                    print('Found solution: {} = {} + 2x{}^2'.format(n, p, k))
+                    raise KeyboardInterrupt
+    except KeyboardInterrupt:
+        continue
+    print("Couldn't find solution for ", n)
+    answer = n
+    break
+print("46.", answer)

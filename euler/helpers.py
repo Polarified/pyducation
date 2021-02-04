@@ -75,6 +75,18 @@ def sieve_of_eratosthenes(n):
     return [i for i in range(2, len(numbers)) if numbers[i]]
 
 
+def generate_primes():
+    """
+    Generates a sequence of prime numbers.
+    """
+    n = 1
+    while True:
+        if is_prime(n):
+            yield n
+        n += 2
+
+
+
 def lcm(*args):
     """
     Finds the least common multiple of a sequence.
