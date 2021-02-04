@@ -165,3 +165,19 @@ def is_subtring_divisibile(n: str):
             n[5:8]) % 11 == 0 and int(n[6:9]) % 13 == 0 and int(n[7:10]) % 17 == 0:
         return True
     return False
+
+
+def is_dig_cancelling(i, j):
+    return (j // 10) == (i % 10) and (i // 10) / (j % 10) == i / j
+
+
+def pentagonal(n):
+    return int(n * (3 * n - 1) / 2)
+
+
+def triangular(n):
+    return int(n * (n + 1) / 2)
+
+
+def hexagonal(n):
+    return int(n * (2 * n - 1))
