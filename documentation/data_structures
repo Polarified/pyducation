@@ -1,0 +1,22 @@
+Data Structures
+
+ADT - Abstract Data Types. The interface that needs to be implemented, regardless of the implementation itself.
+
+Big-O Notation - an upper bound of complexity in the worst case, that helps to quantify performance as input size becomes arbitrarily large.
+
+Arrays
+Static Array: a container of size n, indexable from 0 to n-1.
+Dynamic Array: an array that can grow and shrink in size, indexable as well.
+Complexity:
+Access = O(1) vs O(1)
+Search = O(n) vs O(n)
+Insertion = X vs O(n) (have to move everything)
+Appending = X vs O(1)
+Deleting = X vs O(n) (have to move everything)
+
+Implement a Dynamic Array:
+Create a static array with an initial size. When we reach maximum capacity, double the size and copy everything.
+
+Linked List
+
+Stack
