@@ -9,22 +9,31 @@ class Queue(list):
     def peek(self):
         return self[0]
 
+class PriorityQueue(Queue):
+    def __init__(self, comparator):
+        super(PriorityQueue, self).__init__()
+        self._comparator = comparator
+
+    def dequeue(self):
+        self.remove(self._comparator(self))
+
 def main():
     q = Queue()
-    print(q)
+    pq = PriorityQueue(min)
     q.enqueue(1)
-    print(q)
-    q.enqueue(2)
-    print(q)
-    q.dequeue()
-    print(q)
     q.enqueue(3)
-    print(q)
-    q.dequeue()
-    print(q)
-    q.enqueue(4)
-    print(q)
+    q.enqueue(2)
+    q.enqueue(0)
 
+    pq.enqueue(1)
+    pq.enqueue(3)
+    pq.enqueue(2)
+    pq.enqueue(0)
+    print(q, pq)
+
+    q.dequeue()
+    pq.dequeue()
+    print(q, pq)
 
 if __name__ == '__main__':
     main()

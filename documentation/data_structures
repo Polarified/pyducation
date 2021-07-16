@@ -20,3 +20,15 @@ Create a static array with an initial size. When we reach maximum capacity, doub
 Linked List
 
 Stack
+
+Queue
+
+Priority Queue
+An abstract data structure where items are removed based on some kind of priority.
+* Turning a Min PQ into a Max PQ
+
+
+Heap
+A data structure where for every parent node, it's children will be ordered such that the parent and child match the ordering.
+There can be a max heap and a min heap, and they can be binary (2 leaves per node) or non binary.
+The ordering is called the "heap invariant". A heap must be a tree. There cannot be any cycles.
