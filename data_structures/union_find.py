@@ -9,7 +9,8 @@ class UnionFind(list):
 
     def find(self, n):
         i = self.index(n)
-        while (self.index(n) != n)
+        while self.index(n) != n:
+            pass
 
     def union(self, n, m):
-
+        pass
