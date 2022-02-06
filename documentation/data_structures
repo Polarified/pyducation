@@ -32,3 +32,6 @@ Heap
 A data structure where for every parent node, it's children will be ordered such that the parent and child match the ordering.
 There can be a max heap and a min heap, and they can be binary (2 leaves per node) or non binary.
 The ordering is called the "heap invariant". A heap must be a tree. There cannot be any cycles.
+
+Union Find
+Splits elements into 2 different groups. Has 2 functions - find and union. 
