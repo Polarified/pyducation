@@ -47,5 +47,3 @@ def ways_to_make(n):
 So to make 10, we have this many ways:
 
 """
-
-print(is_subtring_divisibile('0406357289'))

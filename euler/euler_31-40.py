@@ -1,4 +1,5 @@
 import itertools
+from fractions import Fraction
 from euler.helpers import *
 
 # 31. Coin sums
@@ -13,12 +14,13 @@ answer = sum(a | b)
 print("32.", answer)
 
 # 33. Digit cancelling fractions
-
+answer = math.prod([Fraction(i, j) for i in range(10, 100) for j in range(i + 1, 100) if
+                    j % 10 != 0 and is_dig_cancelling(i, j)])
+print("33.", answer)
 
 # 34. Digit factorials
 answer = sum(i for i in range(10, 10000000) if i == sum(math.factorial(int(x)) for x in str(i)))
 print("34.", answer)
-
 
 # 35. Circular primes
 answer = len([n for n in range(2, 1000000) if is_circular(n)])
@@ -52,7 +54,7 @@ answer = 0
 for i in range(12, 1001):
     imax = 0
     for j in range(1, i // 3):
-        for k in range(1, (i - j)//2 + 1):
+        for k in range(1, (i - j) // 2 + 1):
             if (i - k - j) ** 2 == j ** 2 + k ** 2:
                 imax += 1
     if imax > tmax:
